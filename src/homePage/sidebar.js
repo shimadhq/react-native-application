@@ -9,7 +9,7 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
 
   const colors = useMemo(
     () => ({
-      background: isDarkMode ? '#1a2a44' : '#fff',
+      background: isDarkMode ? '#1C242F' : '#fff',
       text: isDarkMode ? '#f8f8f8' : '#000000',
       border: isDarkMode ? '#f8f8f8' : '#ddd',
     }),
@@ -20,6 +20,18 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
     () => [styles.name, { color: colors.text }],
     [colors.text]
   );
+
+  const menuItemsGroup1 = [
+      { title: 'ماموریت ها', icon: require('../../assets/mission.png'), screen: 'missionScreen' },
+      { title: 'عملیات', icon: require('../../assets/operation.png'), screen: 'operationScreen' },
+      { title: 'موقعیت', icon: require('../../assets/location.png'), screen: 'locationScreen' },
+  ];
+
+  const menuItemsGroup2 = [
+      { title: 'کارتابل', icon: require('../../assets/Cartable.png'), screen: 'cartableScreen' },
+      { title: 'مرکز تماس', icon: require('../../assets/call-center.png'), screen: 'contactScreen' },
+      { title: 'تنظیمات', icon: require('../../assets/setting.png'), screen: 'settingsScreen' },
+  ];
 
   React.useEffect(() => {
     Animated.timing(slideAnim, {
@@ -37,7 +49,7 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
       ]}
     >
       {/* هدر سایدبار */}
-      <View style={styles.header}>
+      <View style={[styles.header, {backgroundColor: isDarkMode ? '#233040' : '#f8f8f8'}]}>
         <View style={styles.sectionTwo}>
           <TouchableOpacity onPress={toggleSidebar}>
             <Icon
@@ -60,39 +72,67 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
               defaultSource={{ uri: 'https://via.placeholder.com/60' }}
             />
           </TouchableOpacity>
-          <View style={styles.fullName}>
-            {firstName ? (
-              <Text
-                style={textStyle}
-                accessible
-                accessibilityLabel="نام کاربر"
-              >
-               {firstName || 'نامشخص'}
-              </Text>
-            ) : null}
-            {lastName ? (
-              <Text
-                style={textStyle}
-                accessible
-                accessibilityLabel="نام خانوادگی کاربر"
-              >
-                {lastName || 'نامشخص'}
-              </Text>
-            ) : null}
+          <View style={styles.nameNumber}>
+            <View style={styles.fullName}>
+              {firstName ? (
+                   <Text
+                     style={[textStyle, {fontSize: 14, fontWeight: 500}]}
+                     accessible
+                     accessibilityLabel="نام کاربر"
+                   >
+                     {firstName || 'نامشخص'}
+                   </Text>
+              ) : null}
+              {lastName ? (
+                   <Text
+                     style={[textStyle, {fontSize: 14, fontWeight: 500}]}
+                     accessible
+                     accessibilityLabel="نام خانوادگی کاربر"
+                   >
+                      {lastName || 'نامشخص'}
+                   </Text>
+              ) : null}
+            </View>
+            <View style={styles.number}>
+              {mobileNumber ? (
+                  <Text
+                     style={[textStyle, {fontWeight: 400, fontSize: 12}]}
+                     accessible
+                     accessibilityLabel="شماره موبایل کاربر"
+                  >
+                     {mobileNumber || 'نامشخص'}
+                  </Text>
+              ) : null}
+            </View>
           </View>
         </View>
       </View>
 
-      {/* محتوای سایدبار (نمونه) */}
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-        <Text style={[styles.sidebarItem, { color: colors.text }]}>خانه</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-        <Text style={[styles.sidebarItem, { color: colors.text }]}>پروفایل</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text style={[styles.sidebarItem, { color: colors.text }]}>برگشت به صفحه قبلی</Text>
-      </TouchableOpacity>
+      <View style={{height: 25}} />
+      {/* محتوای سایدبار */}
+      {menuItemsGroup1.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            style={styles.menuItem}
+            onPress={() => handleMenuItemPress(item.screen)}
+          >
+            <Image source={item.icon} style={styles.customIcon} />
+            <Text style={[styles.menuText, {color: isDarkMode ? '#f8f8f8' : '#000000'}]}>{item.title}</Text>
+          </TouchableOpacity>
+      ))}
+
+      <View style={[styles.divider, {backgroundColor: isDarkMode ? '#0C0F14' : '#adb5bd'}]} />
+
+      {menuItemsGroup2.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.menuItem}
+                onPress={() => handleMenuItemPress(item.screen)}
+              >
+                <Image source={item.icon} style={[styles.customIcon]} />
+                <Text style={[styles.menuText, {color: isDarkMode ? '#f8f8f8' : '#000000'}]}>{item.title}</Text>
+              </TouchableOpacity>
+      ))}
     </Animated.View>
   );
 };
@@ -101,7 +141,7 @@ const styles = StyleSheet.create({
   sidebar: {
     position: 'absolute',
     width: 250,
-    height: '100%',
+    height: '96%',
     paddingTop: 50,
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 0 },
@@ -112,9 +152,11 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingTop: 15,
+    paddingBottom: 25,
+    marginTop: 5,
   },
   sectionOne: {
     flexDirection: 'column',
@@ -125,6 +167,7 @@ const styles = StyleSheet.create({
   },
   closeIcon: {
     marginRight: 10,
+    marginTop: 5,
   },
   profileContainer: {
     borderWidth: 2,
@@ -144,12 +187,31 @@ const styles = StyleSheet.create({
   },
   fullName: {
     flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
-    gap: 10,
+    gap: 4,
     marginTop: 10,
   },
   sidebarItem: {
     padding: 15,
     fontSize: 18,
     borderBottomWidth: 1,
+  },
+  number: {
+     alignItems: 'center',
+     marginTop: 5,
+  },
+  menuItem: {
+      flexDirection: 'row-reverse',
+      alignItems: 'center',
+      paddingVertical: 15,
+      gap: 30,
+      paddingHorizontal: 20,
+  },
+  menuText: {
+      fontSize: 14,
+  },
+  divider: {
+      height: 1,
+      marginVertical: 10,
+      marginRight: 50,
   },
 });
