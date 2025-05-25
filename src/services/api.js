@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { Alert } from "react-native";
-import * as Location from 'expo-location';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const API_URL='http://45.132.172.163/api/app';
 
 const apiClient = axios.create({
     baseURL: API_URL,
