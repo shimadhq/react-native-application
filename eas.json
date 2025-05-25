@@ -1,40 +1,42 @@
 {
-    "cli": {
-      "version": ">= 0.52.0"
-    },
-    "build": {
-      "development": {
-        "developmentClient": true,
-        "distribution": "internal",
-        "ios": {
+  "cli": {
+    "version": ">= 0.52.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
         "simulator": true
-        },
-        "android": {
-          "buildType": "apk"
-        }
       },
-      "preview": {
-        "distribution": "internal",
-        "android": {
+      "android": {
         "buildType": "apk"
-        }, 
-        "ios": {
-          "simulator": false,
-          "resourceClass": "medium"
-        }
       },
-      "production": {
-        "distribution": "store",
-        "channel": "production",
-        "ios": {
-        "resourceClass": "medium"
-        },
-        "android": {
-          "buildType": "aab"
-        }
-      }
+      "channel": "development"
     },
-    "submit": {
-      "production": {}
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": false,
+        "resourceClass": "medium"
+      },
+      "channel": "preview"
+    },
+    "production": {
+      "distribution": "store",
+      "channel": "production",
+      "ios": {
+        "resourceClass": "medium"
+      },
+      "android": {
+        "buildType": "apk"
+      }
     }
+  },
+  "submit": {
+    "production": {}
+  }
 }

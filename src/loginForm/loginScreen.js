@@ -6,9 +6,7 @@ import { Switch } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { LoginForm } from "./loginForm.js";
 
-
-
-export default function LoginScreen({ mobileNumber, setMobileNumber, setIsAuthenticated }){
+export default function LoginScreen({ firstName, lastName, mobileNumber, setMobileNumber }){
     const { isDarkMode, toggleTheme } = useContext(ThemeContext);
     const navigation = useNavigation();
 
@@ -16,17 +14,28 @@ export default function LoginScreen({ mobileNumber, setMobileNumber, setIsAuthen
         <SafeAreaView style={[styles.loginscreen, isDarkMode ? styles.dark : styles.light]}>
             <View style={styles.centered}>
                 {/* Centered Content */}
-                <View style={styles.logo}>
-                  <Logo />
-                  </View>
+                <View style={[ isDarkMode ? styles.logoDark : styles.logo ]}>
+                   <Logo />
+                </View>
                      
-                  <LoginForm navigation={navigation} mobileNumber={mobileNumber} setMobileNumber={setMobileNumber} setIsAuthenticated={setIsAuthenticated} />
+                  <LoginForm 
+                  navigation={navigation} 
+                  mobileNumber={mobileNumber} 
+                  setMobileNumber={setMobileNumber}
+                  firstName={firstName}
+                  lastName={lastName}
+                  />
                 </View>
         
                     
                 <View style={styles.switcher}> 
                   {/* Theme Switcher at Bottom */}
-                  <Switch value={isDarkMode} onValueChange={toggleTheme}/>
+                  <Switch 
+                  value={isDarkMode} 
+                  onValueChange={toggleTheme}
+                  />
+                </View>
+                <View style={[styles.box, {backgroundColor: isDarkMode ? '#212D3B' : '#dee2e6'}]}>
                 </View>
         </SafeAreaView>
     )
@@ -40,7 +49,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(241, 249, 252, 0.6)',
     },
     dark: {
-        backgroundColor: '#1B263B',
+        backgroundColor: '#162432',
     },
     centered: {
         flex: 1,
@@ -49,10 +58,18 @@ const styles = StyleSheet.create({
     logo:{
         alignItems: 'center',
     },
+    logoDark: {
+        marginBottom: 210,
+        alignItems: 'center',
+        marginTop: 200
+    },
     switcher: {
-        position: 'static',
         justifyContent: 'flex-end',
         alignItems: 'center',
         marginBottom: 20,
+    },
+    box: {
+       width: '100%',
+       height: 38,
     },
 });

@@ -11,10 +11,10 @@ export default function LoginOrRegisterScreen(){
     const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
     return(
-        <SafeAreaView style={[ styles.screen, isDarkMode ? dark : white ]}>
+        <SafeAreaView style={[ styles.screen, isDarkMode ? styles.dark : styles.white ]}>
             <View style={styles.centered}>
                 { /* Centered Context */ }
-                <View style={styles.logo}>
+                <View style={[ isDarkMode ? styles.logoDark : styles.logo ]}>
                   <Logo />
                 </View>
                 <LoginOrRegister navigation={navigation} />
@@ -23,6 +23,8 @@ export default function LoginOrRegisterScreen(){
             { /* Theme Switcher at the bottom */ }
             <View style={styles.switcher}>
                 <Switch value={isDarkMode} onValueChange={toggleTheme} />
+            </View>
+            <View style={[styles.box, {backgroundColor: isDarkMode ? '#212D3B' : '#dee2e6'}]}>
             </View>
         </SafeAreaView>
     )
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(241, 249, 252, 0.6)',
     },
     dark: {
-        backgroundColor: '#1B263B',
+        backgroundColor: '#162432',
     },
     centered: {
         flex: 1,
@@ -45,10 +47,18 @@ const styles = StyleSheet.create({
     logo: {
        alignItems: 'center',
     },
+    logoDark: {
+       marginBottom: 200,
+       alignItems: 'center',
+       marginTop: 205
+    },
     switcher: {
-       position: 'static',
        justifyContent: 'flex-end',
        alignItems: 'center',
        marginBottom: 20,
+    },
+    box: {
+       width: '100%',
+       height: 38,
     },
 })

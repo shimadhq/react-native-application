@@ -3,125 +3,88 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ThemeProvider } from './src/themeProvider/themeProvider';
 import { sendLocation } from "./src/services/api";
+import { Alert } from "react-native";
+import { BackHandler } from 'react-native';
 import * as Location from 'expo-location';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RegisterScreen from './src/registerForm/registerScreen';
-import GpsLocatorScreen from './src/gpsLocatin/gpsLocatorScreen';
-import LocationIsActiveScreen from './src/locationIsActive/locationIsActiveScreen';
+import LocationTrackerScreen from './src/locationTracker/locationTrackerScreen';
+import HomePageScreen from './src/homePage/homePageScreen';
 import LoginOrRegisterScreen from './src/loginOrRegister/loginOrRegisterScreen';
 import LoginScreen from './src/loginForm/loginScreen';
-
-
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [mobileNumber, setMobileNumber] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [ location, setLocation ] = useState(null);
-  const [hasLocationPermission, setHasLocationPermission] = useState(false);
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   useEffect(() => {
-    //Loading userId from AsyncStorage when the app starts
-    const loadUserId = async () => {
-      const storedUserId = await AsyncStorage.getItem('userId');
-      if (storedUserId) {
-        setIsAuthenticated(true);
-      }
-    };
-    loadUserId();
+         //When the page loads, a listener is added for the back button
+         const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+             () => {
+             //Returning false will cause the back button to do nothing
+             return true;
+                  }
+             );
+
+        //When the page is closed, the listener is removed
+        return () => backHandler.remove();
   }, []);
-
-  useEffect(() => {
-    let watchId;
-
-    const startLocationTracking = async () => {
-      if (!isAuthenticated || !hasLocationPermission) return;
-
-      try {
-        const userId = await AsyncStorage.getItem('userId');
-        if (!userId) return;
-
-        watchId = await Location.watchPositionAsync(
-          {
-            accuracy: Location.Accuracy.High,
-            distanceInterval: 10,
-            timeInterval: 5000,
-          },
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            setLocation({ latitude, longitude });
-            sendLocation(userId, latitude, longitude).catch((error) => {
-              console.error('Error sending location:', error);
-            });
-          }
-        );
-      } catch (error) {
-        console.error('Location error:', error);
-      }
-    };
-
-    startLocationTracking();
-
-    return () => {
-      if (watchId) {
-        Location.clearWatch(watchId);
-      }
-    };
-  }, [isAuthenticated, hasLocationPermission])
 
  return (
   <ThemeProvider>
    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="register/login">
+      <Stack.Navigator screenOptions={{ headerShown: false, gestureEnabled: false }} initialRouteName="register/login">
           <Stack.Screen
            name="register/login" 
-           children={() => (
-             <LoginOrRegisterScreen />
-           )} 
+           children={() => <LoginOrRegisterScreen />} 
            />
           <Stack.Screen 
            name="register" 
            children={() => (
-             <RegisterScreen 
-               mobileNumber={mobileNumber} 
-               setMobileNumber={setMobileNumber} 
-               setIsAuthenticated={setIsAuthenticated}
-             />
+            <RegisterScreen 
+            mobileNumber={mobileNumber} 
+            setMobileNumber={setMobileNumber}
+            firstName={firstName}
+            lastName={lastName}
+            setFirstName={setFirstName}
+            setLastName={setLastName}
+           />
            )} 
            />
            <Stack.Screen 
             name="login"
             children={() => (
               <LoginScreen
-               mobileNumber={mobileNumber}
-               setMobileNumber={setMobileNumber}
-               setIsAuthenticated={setIsAuthenticated}
-              />
+                mobileNumber={mobileNumber}
+                setMobileNumber={setMobileNumber}
+               />
             )}
            />
           <Stack.Screen 
-           name="gpsLocator" 
+           name="locationTracker"
            children={({ route }) => (
-             <GpsLocatorScreen
+            <LocationTrackerScreen
                route={route}
-               setHasLocationPermission={setHasLocationPermission}
-             />
-           )}
-           options={{ gestureEnabled: false }} 
+              />
+            )}
+            options={{ gestureEnabled: false }} 
            />
           <Stack.Screen 
-           name="locationIsActive" 
+           name="homePage"
            children={({ route }) => (
-             <LocationIsActiveScreen
+             <HomePageScreen
                route={route}
              />
-           )}
-          options={{ gestureEnabled: false }}
+            )}
+            options={{ gestureEnabled: false }}
            />
       </Stack.Navigator>
    </NavigationContainer>
   </ThemeProvider>
   );
-};
+}
 
