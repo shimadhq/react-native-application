@@ -1,15 +1,9 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Switch } from 'react-native';
 import { ThemeContext } from '../themeProvider/themeProvider.js';
-import { useFonts } from "expo-font";
 
 export const Body = ({ isTracking, toggleTracking }) => {
   const { isDarkMode } = useContext(ThemeContext);
-
-  const [fontsLoaded] = useFonts({
-    'yekan-regular': require('../../assets/fonts/YekanBakh-Regular.ttf'),
-    'yekan-semibold': require('../../assets/fonts/YekanBakh-SemiBold.ttf'),
-  });
 
   return (
     <View style={styles.bodyContainer}>
@@ -26,7 +20,7 @@ export const Body = ({ isTracking, toggleTracking }) => {
         </View>
         <View style={styles.message2}>
           <View style={[styles.value, {backgroundColor: isDarkMode ? '#212D3B' : '#ffffff'}]}>
-            <Text style={[styles.text, {color: isDarkMode ? '#f8f8f8' : 'rgba(0, 0, 0, 0.8)'}, {fontFamily: 'yekan-regular'}]}>1</Text>
+            <Text style={[styles.text, {color: isDarkMode ? '#f8f8f8' : 'rgba(0, 0, 0, 0.8)'}]}>1</Text>
           </View>
           <Text style={[styles.labelText, {color: isDarkMode ? '#f8f8f8' : 'rgba(0, 0, 0, 0.8)'}]}>پیام ها</Text>
         </View>

@@ -53,12 +53,6 @@ export function LocationTracker({ route, navigation }) {
       const location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
       const { latitude, longitude, accuracy } = location.coords;
 
-
-      /*if (latitude < 36.1 || latitude > 36.4 || longitude < 59.3 || longitude > 59.8) {
-        Alert.alert('هشدار', 'مختصات خارج از محدوده مشهد است.');
-        return;
-      }*/
-
       // انتقال به homePage با داده اولیه
       console.log('Sending to homePage:', { userId, firstName, lastName, mobileNumber, initialLocation: location });
       navigation.navigate('homePage', { userId, firstName, lastName, mobileNumber, initialLocation: location });

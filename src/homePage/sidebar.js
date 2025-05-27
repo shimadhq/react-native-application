@@ -22,15 +22,33 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
   );
 
   const menuItemsGroup1 = [
-      { title: 'ماموریت ها', icon: require('../../assets/mission.png'), screen: 'missionScreen' },
-      { title: 'عملیات', icon: require('../../assets/operation.png'), screen: 'operationScreen' },
-      { title: 'موقعیت', icon: require('../../assets/location.png'), screen: 'locationScreen' },
+     { title: 'ماموریت ها', 
+        icon: isDarkMode ? require('../../assets/mission.png') : require('../../assets/mission-dark.png'), 
+        screen: 'missionScreen' 
+      },
+      { title: 'عملیات',
+        icon: isDarkMode ? require('../../assets/operation.png') : require('../../assets/operation-dark.png'), 
+        screen: 'operationScreen' 
+      },
+      { title: 'موقعیت', 
+        icon: isDarkMode ? require('../../assets/location.png') : require('../../assets/location-dark.png'), 
+        screen: 'locationScreen' 
+      },
   ];
 
   const menuItemsGroup2 = [
-      { title: 'کارتابل', icon: require('../../assets/Cartable.png'), screen: 'cartableScreen' },
-      { title: 'مرکز تماس', icon: require('../../assets/call-center.png'), screen: 'contactScreen' },
-      { title: 'تنظیمات', icon: require('../../assets/setting.png'), screen: 'settingsScreen' },
+      { title: 'کارتابل', 
+        icon: isDarkMode ? require('../../assets/Cartable.png') : require('../../assets/cartable-dark.png'), 
+        screen: 'cartableScreen' 
+      },
+      { title: 'مرکز تماس', 
+        icon: isDarkMode ? require('../../assets/call-center.png') : require('../../assets/call-center-dark.png'), 
+        screen: 'contactScreen' 
+      },
+      { title: 'تنظیمات', 
+        icon: isDarkMode ? require('../../assets/setting.png') : require('../../assets/setting-dark.png'), 
+        screen: 'settingsScreen' 
+      },
   ];
 
   React.useEffect(() => {
