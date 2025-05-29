@@ -46,7 +46,7 @@ export function LoginForm({ mobileNumber, setMobileNumber, navigation }){
       };
 
       return (
-        <View style={styles.loginForm}>
+        <View style={[isDarkMode ? styles.loginFormDark :styles.loginForm]}>
           <TextInput
             style={[
               styles.textInput,
@@ -85,6 +85,13 @@ export function LoginForm({ mobileNumber, setMobileNumber, navigation }){
 
 const styles = StyleSheet.create({
             loginForm: {
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: "center",
+                marginBottom: 60,
+                marginTop: 80,
+            },
+            loginFormDark: {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: "center",

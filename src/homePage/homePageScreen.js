@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, Alert, Linking, Platform, StyleSheet, Switch } from 'react-native';
+import { View, Alert, Linking, Platform, StyleSheet } from 'react-native';
 import * as Location from 'expo-location';
 import { ThemeContext } from "../themeProvider/themeProvider.js";
 import { sendLocation } from "../services/api.js";
@@ -162,13 +162,7 @@ const HomePageScreen = ({ route }) => {
          toggleTracking={toggleTracking}
        />
       <View style={styles.switcher}>
-        {/* Theme Switcher at Bottom */}
-        <Switch
-        value={isDarkMode}
-        onValueChange={toggleTheme}
-        />
-      </View>
-      <View style={[styles.box, {backgroundColor: isDarkMode ? '#212D3B' : '#dee2e6'}]}>
+        <View style={[styles.box, {backgroundColor: isDarkMode ? '#212D3B' : '#dee2e6'}]} />
       </View>
     </View>
   );

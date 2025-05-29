@@ -1,6 +1,5 @@
 import React, { useContext, useMemo } from 'react';
 import { View, Text, TouchableOpacity, Animated, StyleSheet, Image, I18nManager } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ThemeContext } from "../themeProvider/themeProvider.js";
 
 export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName, mobileNumber, navigation }) => {
@@ -23,30 +22,34 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
 
   const menuItemsGroup1 = [
      { title: 'ماموریت ها', 
-        icon: isDarkMode ? require('../../assets/mission.png') : require('../../assets/mission-dark.png'), 
+        icon: isDarkMode ? require('../../assets/mission-dark.png') : require('../../assets/mission.png'), 
         screen: 'missionScreen' 
       },
       { title: 'عملیات',
-        icon: isDarkMode ? require('../../assets/operation.png') : require('../../assets/operation-dark.png'), 
+        icon: isDarkMode ? require('../../assets/operation-dark.png') : require('../../assets/operation.png'), 
         screen: 'operationScreen' 
       },
       { title: 'موقعیت', 
-        icon: isDarkMode ? require('../../assets/location.png') : require('../../assets/location-dark.png'), 
+        icon: isDarkMode ? require('../../assets/location-dark.png') : require('../../assets/location.png'), 
         screen: 'locationScreen' 
       },
   ];
 
   const menuItemsGroup2 = [
       { title: 'کارتابل', 
-        icon: isDarkMode ? require('../../assets/Cartable.png') : require('../../assets/cartable-dark.png'), 
+        icon: isDarkMode ? require('../../assets/cartable-dark.png') : require('../../assets/cartable.png'), 
         screen: 'cartableScreen' 
       },
       { title: 'مرکز تماس', 
-        icon: isDarkMode ? require('../../assets/call-center.png') : require('../../assets/call-center-dark.png'), 
+        icon: isDarkMode ? require('../../assets/contact-dark.png') : require('../../assets/call-center.png'), 
+        screen: 'contactScreen' 
+      },
+      { title: 'پیام ها', 
+        icon: isDarkMode ? require('../../assets/message-dark.png') : require('../../assets/call-center.png'), 
         screen: 'contactScreen' 
       },
       { title: 'تنظیمات', 
-        icon: isDarkMode ? require('../../assets/setting.png') : require('../../assets/setting-dark.png'), 
+        icon: isDarkMode ? require('../../assets/setting-dark.png') : require('../../assets/setting.png'), 
         screen: 'settingsScreen' 
       },
   ];
@@ -70,12 +73,24 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
       <View style={[styles.header, {backgroundColor: isDarkMode ? '#233040' : '#f8f8f8'}]}>
         <View style={styles.sectionTwo}>
           <TouchableOpacity onPress={toggleSidebar}>
-            <Icon
-              name="close"
-              size={30}
-              color={colors.text}
-              style={styles.closeIcon}
+            <Image
+                source={require('../../assets/close-dark.png')}
+                style={[styles.closeIcon, { display: isDarkMode ? 'flex' : 'none' }]}
             />
+            <Image
+                source={require('../../assets/close.png')}
+                style={[styles.closeIcon, { display: isDarkMode ? 'none' : 'flex' }]}
+             />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.darkmode} onPress={toggleTheme}>
+            <Image
+                source={require('../../assets/sun.png')}
+                style={[styles.darkmodeButton, { display: isDarkMode ? 'flex' : 'none' }]}
+            />
+            <Image
+                source={require('../../assets/close.png')}
+                style={[styles.closeIcon, { display: isDarkMode ? 'none' : 'flex' }]}
+             />
           </TouchableOpacity>
         </View>
         <View style={styles.sectionOne}>
@@ -159,7 +174,7 @@ const styles = StyleSheet.create({
   sidebar: {
     position: 'absolute',
     width: 250,
-    height: '96%',
+    height: '100%',
     paddingTop: 50,
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 0 },
@@ -182,6 +197,7 @@ const styles = StyleSheet.create({
   },
   sectionTwo: {
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   closeIcon: {
     marginRight: 10,
@@ -209,7 +225,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   sidebarItem: {
-    padding: 15,
+    padding: 10,
     fontSize: 18,
     borderBottomWidth: 1,
   },
@@ -226,6 +242,10 @@ const styles = StyleSheet.create({
   },
   menuText: {
       fontSize: 14,
+  },
+  customIcon: {
+      width: 21,
+      height: 26,
   },
   divider: {
       height: 1,

@@ -62,7 +62,7 @@ export function LocationTracker({ route, navigation }) {
   }, [navigation, userId, firstName, lastName, mobileNumber]); // وابستگی‌ها برای رندر مجدد
 
   return (
-    <View style={styles.gpstracker}>
+    <View style={[isDarkMode ? styles.gpstrackerDark :styles.gpstracker]}>
       <View style={styles.textcontainer}>
         <Text style={[styles.text, isDarkMode ? styles.light : styles.dark]}>
           در حال دریافت موقعیت مکانی ...
@@ -75,6 +75,14 @@ export function LocationTracker({ route, navigation }) {
 // تعریف استایل‌ها
 const styles = StyleSheet.create({
   gpstracker: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 60,
+    marginTop: 80,
+  },
+  gpstrackerDark: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',

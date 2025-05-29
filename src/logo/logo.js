@@ -22,8 +22,7 @@ const styles = StyleSheet.create({
     logo: {
         width: 195,
         resizeMode: 'contain',
-        marginBottom: -87,
-        marginTop: 0,
+        marginBottom: -90,
     },
     whiteLogo: {
         width: 160,

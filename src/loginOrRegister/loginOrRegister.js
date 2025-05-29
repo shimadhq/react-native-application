@@ -14,7 +14,7 @@ export const LoginOrRegister = ({ navigation }) => {
     };
 
     return(
-        <View style={styles.container}>
+        <View style={[isDarkMode ? styles.containerDark : styles.container]}>
             <TouchableOpacity style={[isDarkMode ? styles.registerDark  : styles.registerWhite]} onPress={handleRegister}>
                 <Text style={[ isDarkMode ? styles.textWhite : styles.textDark ]}>
                    ثبت نام
@@ -35,7 +35,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginVertical: 6,
-        marginBottom: 130
+        marginBottom: 70,
+        marginTop: 80,
+    },
+    containerDark: {
+         flexDirection: 'column',
+         alignItems: 'center',
+         justifyContent: 'center',
+         marginVertical: 6,
+         marginBottom: 130,
     },
     registerWhite: {
         backgroundColor: 'rgb(186, 236, 190)',
