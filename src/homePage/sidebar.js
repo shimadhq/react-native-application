@@ -4,7 +4,7 @@ import { ThemeContext } from "../themeProvider/themeProvider.js";
 
 export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName, mobileNumber, navigation }) => {
   const slideAnim = React.useRef(new Animated.Value(isOpen ? 0 : -250)).current;
-  const { isDarkMode } = useContext(ThemeContext);
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
   const colors = useMemo(
     () => ({
@@ -31,7 +31,7 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
       },
       { title: 'موقعیت', 
         icon: isDarkMode ? require('../../assets/location-dark.png') : require('../../assets/location.png'), 
-        screen: 'locationScreen' 
+        screen: 'cartableScreen' 
       },
   ];
 
@@ -41,11 +41,11 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
         screen: 'cartableScreen' 
       },
       { title: 'مرکز تماس', 
-        icon: isDarkMode ? require('../../assets/contact-dark.png') : require('../../assets/call-center.png'), 
+        icon: isDarkMode ? require('../../assets/contact-dark.png') : require('../../assets/contact.png'), 
         screen: 'contactScreen' 
       },
       { title: 'پیام ها', 
-        icon: isDarkMode ? require('../../assets/message-dark.png') : require('../../assets/call-center.png'), 
+        icon: isDarkMode ? require('../../assets/message-dark.png') : require('../../assets/message.png'), 
         screen: 'contactScreen' 
       },
       { title: 'تنظیمات', 
@@ -72,26 +72,30 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
       {/* هدر سایدبار */}
       <View style={[styles.header, {backgroundColor: isDarkMode ? '#233040' : '#f8f8f8'}]}>
         <View style={styles.sectionTwo}>
-          <TouchableOpacity onPress={toggleSidebar}>
-            <Image
-                source={require('../../assets/close-dark.png')}
-                style={[styles.closeIcon, { display: isDarkMode ? 'flex' : 'none' }]}
-            />
-            <Image
-                source={require('../../assets/close.png')}
-                style={[styles.closeIcon, { display: isDarkMode ? 'none' : 'flex' }]}
-             />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.darkmode} onPress={toggleTheme}>
-            <Image
-                source={require('../../assets/sun.png')}
-                style={[styles.darkmodeButton, { display: isDarkMode ? 'flex' : 'none' }]}
-            />
-            <Image
-                source={require('../../assets/close.png')}
-                style={[styles.closeIcon, { display: isDarkMode ? 'none' : 'flex' }]}
-             />
-          </TouchableOpacity>
+          <View>
+             <TouchableOpacity style={styles.darkmode} onPress={toggleTheme}>
+                <Image
+                   source={require('../../assets/sun.png')}
+                   style={[styles.darkmodeButton, { display: isDarkMode ? 'flex' : 'none' }]}
+                />
+                <Image
+                    source={require('../../assets/moon.png')}
+                    style={[styles.closeIcon, { display: isDarkMode ? 'none' : 'flex' }]}
+                />
+             </TouchableOpacity>
+          </View>
+          <View style={{marginTop: 60}}>
+             <TouchableOpacity onPress={toggleSidebar}>
+                <Image
+                   source={require('../../assets/close-dark.png')}
+                   style={[styles.closeIcon, { display: isDarkMode ? 'flex' : 'none' }]}
+                />
+                <Image
+                   source={require('../../assets/close.png')}
+                   style={[styles.closeIcon, { display: isDarkMode ? 'none' : 'flex' }]}
+                />
+             </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.sectionOne}>
           <TouchableOpacity
@@ -196,8 +200,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sectionTwo: {
+    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-between',
   },
   closeIcon: {
     marginRight: 10,
@@ -241,7 +245,7 @@ const styles = StyleSheet.create({
       paddingHorizontal: 20,
   },
   menuText: {
-      fontSize: 14,
+      fontSize: 15,
   },
   customIcon: {
       width: 21,

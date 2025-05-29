@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     logoContainer:{
-        alignItems: 'center',
+        alignItems: 'center'
     },
     logo: {
       resizeMode: 'contain',

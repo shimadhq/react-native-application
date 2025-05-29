@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 60,
-    marginTop: 80,
+    marginTop: 20,
   },
   gpstrackerDark: {
     flex: 1,

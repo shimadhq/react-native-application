@@ -173,9 +173,10 @@ const styles = StyleSheet.create({
     flex: 1
   },
   switcher: {
+     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 0,
   },
   box: {
      width: '100%',
