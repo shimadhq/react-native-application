@@ -6,17 +6,22 @@ buildscript {
         minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
         compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '35')
         targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '34')
+        kotlinVersion = findProperty('android.kotlinVersion') ?: '1.9.25'
+        kspVersion = findProperty('android.kspVersion') ?: '1.9.25-1.0.20'
         ndkVersion = "26.1.10909125"
     }
     repositories {
         google()
         mavenCentral()
+        maven {
+        url "http://10.4.0.201:8081/artifactory/libs-release"
+        }
     }
     dependencies {
         classpath('com.android.tools.build:gradle:gradle')
         classpath('com.facebook.react:react-native-gradle-plugin')
-        classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')
-        classpath('com.google.devtools.ksp:symbol-processing-gradle-plugin:1.9.25-1.0.20')
+        classpath('org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion')
+        classpath('com.google.devtools.ksp:symbol-processing-gradle-plugin:$kspVersion')
     }
 }
 
@@ -36,5 +41,6 @@ allprojects {
         google()
         mavenCentral()
         maven { url 'https://www.jitpack.io' }
+        maven { url "http://10.4.0.201:8081/artifactory/libs-release" }
     }
 }
