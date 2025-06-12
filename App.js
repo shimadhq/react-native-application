@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ThemeProvider } from './src/themeProvider/themeProvider';
-import { BackHandler } from 'react-native';
 import RegisterScreen from './src/registerForm/registerScreen';
 import LocationTrackerScreen from './src/locationTracker/locationTrackerScreen';
 import HomePageScreen from './src/homePage/homePageScreen';
@@ -15,20 +14,6 @@ export default function App() {
   const [mobileNumber, setMobileNumber] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-
-  useEffect(() => {
-         //When the page loads, a listener is added for the back button
-         const backHandler = BackHandler.addEventListener(
-        'hardwareBackPress',
-             () => {
-             //Returning false will cause the back button to do nothing
-             return true;
-                  }
-             );
-
-        //When the page is closed, the listener is removed
-        return () => backHandler.remove();
-  }, []);
 
  return (
   <ThemeProvider>

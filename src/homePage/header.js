@@ -45,7 +45,7 @@ export const Header = ({ isTracking, toggleSidebar }) => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 13,

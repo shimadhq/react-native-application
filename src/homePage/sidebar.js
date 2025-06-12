@@ -1,6 +1,7 @@
 import React, { useContext, useMemo } from 'react';
 import { View, Text, TouchableOpacity, Animated, StyleSheet, Image, I18nManager } from 'react-native';
 import { ThemeContext } from "../themeProvider/themeProvider.js";
+import Icon from "../component/Icon/Icon.js";
 
 export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName, mobileNumber, navigation }) => {
   const slideAnim = React.useRef(new Animated.Value(isOpen ? 0 : -250)).current;
@@ -22,34 +23,30 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
 
   const menuItemsGroup1 = [
      { title: 'ماموریت ها', 
-        icon: isDarkMode ? require('../../assets/mission-dark.png') : require('../../assets/mission.png'), 
+        icon: <Icon name="mission" width={25} height={25} />, 
         screen: 'missionScreen' 
       },
       { title: 'عملیات',
-        icon: isDarkMode ? require('../../assets/operation-dark.png') : require('../../assets/operation.png'), 
+        icon: <Icon name="operation" width={25} height={25} />, 
         screen: 'operationScreen' 
       },
       { title: 'موقعیت', 
-        icon: isDarkMode ? require('../../assets/location-dark.png') : require('../../assets/location.png'), 
+        icon: <Icon name="location" width={25} height={25} />, 
         screen: 'cartableScreen' 
       },
   ];
 
   const menuItemsGroup2 = [
       { title: 'کارتابل', 
-        icon: isDarkMode ? require('../../assets/cartable-dark.png') : require('../../assets/cartable.png'), 
+        icon: <Icon name="cartable" width={25} height={25} />, 
         screen: 'cartableScreen' 
       },
       { title: 'مرکز تماس', 
-        icon: isDarkMode ? require('../../assets/contact-dark.png') : require('../../assets/contact.png'), 
-        screen: 'contactScreen' 
-      },
-      { title: 'پیام ها', 
-        icon: isDarkMode ? require('../../assets/message-dark.png') : require('../../assets/message.png'), 
+        icon: <Icon name="call" width={25} height={25} />, 
         screen: 'contactScreen' 
       },
       { title: 'تنظیمات', 
-        icon: isDarkMode ? require('../../assets/setting-dark.png') : require('../../assets/setting.png'), 
+        icon: <Icon name="setting" width={25} height={25} />, 
         screen: 'settingsScreen' 
       },
   ];
@@ -153,7 +150,7 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
             style={styles.menuItem}
             onPress={() => handleMenuItemPress(item.screen)}
           >
-            <Image source={item.icon} style={styles.customIcon} />
+            <Image source={item.icon} />
             <Text style={[styles.menuText, {color: isDarkMode ? '#f8f8f8' : '#000000'}]}>{item.title}</Text>
           </TouchableOpacity>
       ))}
@@ -166,7 +163,7 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
                 style={styles.menuItem}
                 onPress={() => handleMenuItemPress(item.screen)}
               >
-                <Image source={item.icon} style={[styles.customIcon]} />
+                <Image source={item.icon} />
                 <Text style={[styles.menuText, {color: isDarkMode ? '#f8f8f8' : '#000000'}]}>{item.title}</Text>
               </TouchableOpacity>
       ))}
@@ -179,7 +176,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 250,
     height: '100%',
-    paddingTop: 50,
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 0 },
     shadowOpacity: 0.3,
@@ -218,8 +214,8 @@ const styles = StyleSheet.create({
     borderRadius: 31,
   },
   profileImage: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     borderRadius: 30,
     borderWidth: 1,
   },
@@ -241,15 +237,11 @@ const styles = StyleSheet.create({
       flexDirection: 'row-reverse',
       alignItems: 'center',
       paddingVertical: 15,
-      gap: 30,
+      gap: 15,
       paddingHorizontal: 20,
   },
   menuText: {
       fontSize: 15,
-  },
-  customIcon: {
-      width: 21,
-      height: 26,
   },
   divider: {
       height: 1,
