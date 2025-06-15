@@ -21,11 +21,11 @@ export const Body = ({ isTracking, toggleTracking }) => {
             <View style={{ marginTop: 12 }}>
               <Image
                 source={require('../../assets/dark/operation-dark.png')}
-                style={[styles.operationIcon, { display: isDarkMode ? 'flex' : 'none' }]}
+                style={{ display: isDarkMode ? 'flex' : 'none' }}
               />
               <Image
                 source={require('../../assets/light/operation.png')}
-                style={[styles.operationIcon, { display: isDarkMode ? 'none' : 'flex' }]}
+                style={{ display: isDarkMode ? 'none' : 'flex' }}
               />
             </View>
           </View>
@@ -39,11 +39,11 @@ export const Body = ({ isTracking, toggleTracking }) => {
             <View style={{ marginTop: 12 }}>
                <Image
                   source={require('../../assets/dark/message-dark.png')}
-                  style={[styles.messageIcon, { display: isDarkMode ? 'flex' : 'none' }]}
+                  style={{ display: isDarkMode ? 'flex' : 'none' }}
                />
                <Image
                    source={require('../../assets/light/message.png')}
-                   style={[styles.messageIcon, { display: isDarkMode ? 'none' : 'flex' }]}
+                   style={{ display: isDarkMode ? 'none' : 'flex' }}
                />
             </View>
           </View>
@@ -125,14 +125,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 10
-  },
-  operationIcon: {
-    width: 25,
-    height: 26
-  },
-  messageIcon: {
-    width: 22,
-    height: 22
   },
   value: {
     width: 160,
