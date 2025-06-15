@@ -10,11 +10,11 @@ export const Header = ({ isTracking, toggleSidebar }) => {
       <TouchableOpacity onPress={toggleSidebar} style={styles.menuIcon}>
         <View>
               <Image
-                 source={require('../../assets/menu-icon.png')}
+                 source={require('../../assets/dark/menu-icon.png')}
                  style={[styles.whiteLogo, { display: isDarkMode ? 'flex' : 'none' }]}
               />
               <Image
-                  source={require('../../assets/menu.png')}
+                  source={require('../../assets/light/menu.png')}
                   style={[styles.logo, { display: isDarkMode ? 'none' : 'flex' }]}
               />
         </View>
@@ -23,11 +23,11 @@ export const Header = ({ isTracking, toggleSidebar }) => {
       {/* لوگو */}
       <View style={styles.logoContainer}>
         <Image
-           source={require('../../assets/horizontal-logo.png')}
+           source={require('../../assets/light/horizontal-logo.png')}
            style={[styles.whiteLogo, { display: isDarkMode ? 'flex' : 'none' }]}
         />
         <Image
-           source={require('../../assets/horizontal-logo-dark.png')}
+           source={require('../../assets/dark/horizontal-logo-dark.png')}
            style={[styles.logo, { display: isDarkMode ? 'none' : 'flex' }]}
         />
       </View>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 13,
-    paddingVertical: 6,
+    paddingVertical: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.06,

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, Switch } from 'react-native';
+import { View, Text, StyleSheet, Switch, Image } from 'react-native';
 import { ThemeContext } from '../themeProvider/themeProvider.js';
 
 export const Body = ({ isTracking, toggleTracking }) => {
@@ -16,13 +16,37 @@ export const Body = ({ isTracking, toggleTracking }) => {
           <View style={[styles.value, {backgroundColor: isDarkMode ? '#212D3B' : '#ffffff'}]}>
             <Text style={[styles.text, {color: isDarkMode ? '#f8f8f8' : 'rgba(0, 0, 0, 0.8)'}]}>0</Text>
           </View>
-          <Text style={[styles.labelText, {color: isDarkMode ? '#f8f8f8' : 'rgba(0, 0, 0, 0.8)'}]}>عملیات ها</Text>
+          <View style={styles.operation}>
+            <Text style={[styles.labelText, {color: isDarkMode ? '#f8f8f8' : 'rgba(0, 0, 0, 0.8)'}]}>عملیات ها</Text>
+            <View style={{ marginTop: 12 }}>
+              <Image
+                source={require('../../assets/dark/operation-dark.png')}
+                style={[styles.operationIcon, { display: isDarkMode ? 'flex' : 'none' }]}
+              />
+              <Image
+                source={require('../../assets/light/operation.png')}
+                style={[styles.operationIcon, { display: isDarkMode ? 'none' : 'flex' }]}
+              />
+            </View>
+          </View>
         </View>
         <View style={styles.message2}>
           <View style={[styles.value, {backgroundColor: isDarkMode ? '#212D3B' : '#ffffff'}]}>
             <Text style={[styles.text, {color: isDarkMode ? '#f8f8f8' : 'rgba(0, 0, 0, 0.8)'}]}>1</Text>
           </View>
-          <Text style={[styles.labelText, {color: isDarkMode ? '#f8f8f8' : 'rgba(0, 0, 0, 0.8)'}]}>پیام ها</Text>
+          <View style={styles.message}>
+            <Text style={[styles.labelText, {color: isDarkMode ? '#f8f8f8' : 'rgba(0, 0, 0, 0.8)'}]}>پیام ها</Text>
+            <View style={{ marginTop: 12 }}>
+               <Image
+                  source={require('../../assets/dark/message-dark.png')}
+                  style={[styles.messageIcon, { display: isDarkMode ? 'flex' : 'none' }]}
+               />
+               <Image
+                   source={require('../../assets/light/message.png')}
+                   style={[styles.messageIcon, { display: isDarkMode ? 'none' : 'flex' }]}
+               />
+            </View>
+          </View>
         </View>
       </View>
       <View style={[styles.location, { backgroundColor: isDarkMode ? '#212D3B' : '#ffffff' }]}>
@@ -49,7 +73,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   operations: {
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingTop: 35,
@@ -74,10 +98,8 @@ const styles = StyleSheet.create({
   },
   messages: {
     marginTop: 15,
-    flexDirection: 'row',
-    paddingLeft: 30,
-    paddingRight: 30,
-    width: '97%',
+    flexDirection: 'row-reverse',
+    width: '96%',
     gap: 15,
     alignItems: 'center',
     justifyContent: 'center'
@@ -91,6 +113,26 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  operation: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10
+  },
+  message: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10
+  },
+  operationIcon: {
+    width: 25,
+    height: 26
+  },
+  messageIcon: {
+    width: 22,
+    height: 22
   },
   value: {
     width: 160,
@@ -112,7 +154,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   location: {
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',

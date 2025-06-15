@@ -22,34 +22,30 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
 
   const menuItemsGroup1 = [
      { title: 'ماموریت ها', 
-        icon: isDarkMode ? require('../../assets/mission-dark.png') : require('../../assets/mission.png'), 
+        icon: isDarkMode ? require('../../assets/dark/mission-dark.png') : require('../../assets/light/mission.png'),
         screen: 'missionScreen' 
       },
       { title: 'عملیات',
-        icon: isDarkMode ? require('../../assets/operation-dark.png') : require('../../assets/operation.png'), 
+        icon: isDarkMode ? require('../../assets/dark/operation-dark.png') : require('../../assets/light/operation.png'), 
         screen: 'operationScreen' 
       },
       { title: 'موقعیت', 
-        icon: isDarkMode ? require('../../assets/location-dark.png') : require('../../assets/location.png'), 
+        icon: isDarkMode ? require('../../assets/dark/location-dark.png') : require('../../assets/light/location.png'), 
         screen: 'cartableScreen' 
       },
   ];
 
   const menuItemsGroup2 = [
       { title: 'کارتابل', 
-        icon: isDarkMode ? require('../../assets/cartable-dark.png') : require('../../assets/cartable.png'), 
+        icon: isDarkMode ? require('../../assets/dark/cartable-dark.png') : require('../../assets/light/cartable.png'), 
         screen: 'cartableScreen' 
       },
       { title: 'مرکز تماس', 
-        icon: isDarkMode ? require('../../assets/contact-dark.png') : require('../../assets/contact.png'), 
-        screen: 'contactScreen' 
-      },
-      { title: 'پیام ها', 
-        icon: isDarkMode ? require('../../assets/message-dark.png') : require('../../assets/message.png'), 
+        icon: isDarkMode ? require('../../assets/dark/contact-dark.png') : require('../../assets/light/contact.png'), 
         screen: 'contactScreen' 
       },
       { title: 'تنظیمات', 
-        icon: isDarkMode ? require('../../assets/setting-dark.png') : require('../../assets/setting.png'), 
+        icon: isDarkMode ? require('../../assets/dark/setting-dark.png') : require('../../assets/light/setting.png'), 
         screen: 'settingsScreen' 
       },
   ];
@@ -75,23 +71,23 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
           <View>
              <TouchableOpacity style={styles.darkmode} onPress={toggleTheme}>
                 <Image
-                   source={require('../../assets/sun.png')}
+                   source={require('../../assets/dark/sun.png')}
                    style={[styles.darkmodeButton, { display: isDarkMode ? 'flex' : 'none' }]}
                 />
                 <Image
-                    source={require('../../assets/moon.png')}
-                    style={[styles.closeIcon, { display: isDarkMode ? 'none' : 'flex' }]}
+                    source={require('../../assets/light/moon.png')}
+                    style={[styles.darkmodeButton, { display: isDarkMode ? 'none' : 'flex' }]}
                 />
              </TouchableOpacity>
           </View>
           <View style={{marginTop: 60}}>
              <TouchableOpacity onPress={toggleSidebar}>
                 <Image
-                   source={require('../../assets/close-dark.png')}
+                   source={require('../../assets/dark/close-dark.png')}
                    style={[styles.closeIcon, { display: isDarkMode ? 'flex' : 'none' }]}
                 />
                 <Image
-                   source={require('../../assets/close.png')}
+                   source={require('../../assets/light/close.png')}
                    style={[styles.closeIcon, { display: isDarkMode ? 'none' : 'flex' }]}
                 />
              </TouchableOpacity>
@@ -153,7 +149,9 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
             style={styles.menuItem}
             onPress={() => handleMenuItemPress(item.screen)}
           >
-            <Image source={item.icon} style={styles.customIcon} />
+            <View>
+             <Image source={item.icon} />
+            </View>
             <Text style={[styles.menuText, {color: isDarkMode ? '#f8f8f8' : '#000000'}]}>{item.title}</Text>
           </TouchableOpacity>
       ))}
@@ -166,7 +164,9 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
                 style={styles.menuItem}
                 onPress={() => handleMenuItemPress(item.screen)}
               >
-                <Image source={item.icon} style={[styles.customIcon]} />
+                <View>
+                 <Image source={item.icon} />
+                </View>
                 <Text style={[styles.menuText, {color: isDarkMode ? '#f8f8f8' : '#000000'}]}>{item.title}</Text>
               </TouchableOpacity>
       ))}
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
-    width: 210,
+    width: 230,
     height: '100%',
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 0 },
@@ -192,9 +192,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     paddingHorizontal: 15,
-    paddingTop: 15,
+    paddingTop: 20,
     paddingBottom: 25,
-    marginTop: 5,
+    marginTop: 7,
   },
   sectionOne: {
     flexDirection: 'column',
@@ -203,6 +203,10 @@ const styles = StyleSheet.create({
   sectionTwo: {
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  darkmode: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   closeIcon: {
     marginRight: 10,
@@ -242,19 +246,15 @@ const styles = StyleSheet.create({
       flexDirection: 'row-reverse',
       alignItems: 'center',
       paddingVertical: 15,
-      gap: 15,
-      paddingHorizontal: 20,
+      gap: 20,
+      paddingHorizontal: 27,
   },
   menuText: {
       fontSize: 15,
   },
-  customIcon: {
-      width: 22,
-      height: 28,
-  },
   divider: {
       height: 1,
       marginVertical: 10,
-      marginRight: 50,
+      marginRight: 60,
   },
 });
