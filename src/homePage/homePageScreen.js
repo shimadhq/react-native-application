@@ -12,7 +12,7 @@ const HomePageScreen = ({ route }) => {
   const { userId, firstName, lastName, mobileNumber, initialLocation } = route.params || {};
   const [isTracking, setIsTracking] = useState(false);
   const [error, setError] = useState(null);
-  const { isDarkMode } = useContext(ThemeContext);
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   const [locationSubscription, setLocationSubscription] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigation = useNavigation();

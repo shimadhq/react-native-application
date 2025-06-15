@@ -1,10 +1,9 @@
 import React, { useContext, useMemo } from 'react';
 import { View, Text, TouchableOpacity, Animated, StyleSheet, Image, I18nManager } from 'react-native';
 import { ThemeContext } from "../themeProvider/themeProvider.js";
-import Icon from "../component/Icon/Icon.js";
 
 export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName, mobileNumber, navigation }) => {
-  const slideAnim = React.useRef(new Animated.Value(isOpen ? 0 : -250)).current;
+  const slideAnim = React.useRef(new Animated.Value(isOpen ? 0 : 300)).current;
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
   const colors = useMemo(
@@ -23,37 +22,41 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
 
   const menuItemsGroup1 = [
      { title: 'ماموریت ها', 
-        icon: <Icon name="mission" width={25} height={25} />, 
+        icon: isDarkMode ? require('../../assets/mission-dark.png') : require('../../assets/mission.png'), 
         screen: 'missionScreen' 
       },
       { title: 'عملیات',
-        icon: <Icon name="operation" width={25} height={25} />, 
+        icon: isDarkMode ? require('../../assets/operation-dark.png') : require('../../assets/operation.png'), 
         screen: 'operationScreen' 
       },
       { title: 'موقعیت', 
-        icon: <Icon name="location" width={25} height={25} />, 
+        icon: isDarkMode ? require('../../assets/location-dark.png') : require('../../assets/location.png'), 
         screen: 'cartableScreen' 
       },
   ];
 
   const menuItemsGroup2 = [
       { title: 'کارتابل', 
-        icon: <Icon name="cartable" width={25} height={25} />, 
+        icon: isDarkMode ? require('../../assets/cartable-dark.png') : require('../../assets/cartable.png'), 
         screen: 'cartableScreen' 
       },
       { title: 'مرکز تماس', 
-        icon: <Icon name="call" width={25} height={25} />, 
+        icon: isDarkMode ? require('../../assets/contact-dark.png') : require('../../assets/contact.png'), 
+        screen: 'contactScreen' 
+      },
+      { title: 'پیام ها', 
+        icon: isDarkMode ? require('../../assets/message-dark.png') : require('../../assets/message.png'), 
         screen: 'contactScreen' 
       },
       { title: 'تنظیمات', 
-        icon: <Icon name="setting" width={25} height={25} />, 
+        icon: isDarkMode ? require('../../assets/setting-dark.png') : require('../../assets/setting.png'), 
         screen: 'settingsScreen' 
       },
   ];
 
   React.useEffect(() => {
     Animated.timing(slideAnim, {
-      toValue: isOpen ? 0 : -250,
+      toValue: isOpen ? 0 : 300,
       duration: 300,
       useNativeDriver: true,
     }).start();
@@ -150,7 +153,7 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
             style={styles.menuItem}
             onPress={() => handleMenuItemPress(item.screen)}
           >
-            <Image source={item.icon} />
+            <Image source={item.icon} style={styles.customIcon} />
             <Text style={[styles.menuText, {color: isDarkMode ? '#f8f8f8' : '#000000'}]}>{item.title}</Text>
           </TouchableOpacity>
       ))}
@@ -163,7 +166,7 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
                 style={styles.menuItem}
                 onPress={() => handleMenuItemPress(item.screen)}
               >
-                <Image source={item.icon} />
+                <Image source={item.icon} style={[styles.customIcon]} />
                 <Text style={[styles.menuText, {color: isDarkMode ? '#f8f8f8' : '#000000'}]}>{item.title}</Text>
               </TouchableOpacity>
       ))}
@@ -174,7 +177,9 @@ export const Sidebar = ({ isTracking, isOpen, toggleSidebar, firstName, lastName
 const styles = StyleSheet.create({
   sidebar: {
     position: 'absolute',
-    width: 250,
+    top: 0,
+    right: 0,
+    width: 210,
     height: '100%',
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 0 },
@@ -214,8 +219,8 @@ const styles = StyleSheet.create({
     borderRadius: 31,
   },
   profileImage: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     borderRadius: 30,
     borderWidth: 1,
   },
@@ -242,6 +247,10 @@ const styles = StyleSheet.create({
   },
   menuText: {
       fontSize: 15,
+  },
+  customIcon: {
+      width: 22,
+      height: 28,
   },
   divider: {
       height: 1,

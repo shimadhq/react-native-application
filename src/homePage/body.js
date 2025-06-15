@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 35,
+    paddingBottom: 35,
     paddingLeft: 20,
     paddingRight: 20,
     width: '100%',
@@ -75,9 +75,9 @@ const styles = StyleSheet.create({
   messages: {
     marginTop: 15,
     flexDirection: 'row',
-    marginLeft: 30,
-    marginRight: 30,
-    width: '98%',
+    paddingLeft: 30,
+    paddingRight: 30,
+    width: '97%',
     gap: 15,
     alignItems: 'center',
     justifyContent: 'center'
